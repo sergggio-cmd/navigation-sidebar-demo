@@ -119,22 +119,15 @@
 }
 
 .submenu {
-    display: flex;
+    display: none;
     flex-direction: column;
     gap: 8px;
     padding-left: 0;
     margin: 0;
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
 }
 
 .submenu.show {
-    max-height: 500px;
-    opacity: 1;
-    margin: 0;
-    transition: max-height 0.4s ease-in, opacity 0.3s ease-in;
+    display: flex;
 }
 
 .submenu-item {

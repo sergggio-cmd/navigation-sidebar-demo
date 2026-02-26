@@ -385,6 +385,7 @@
 
         // Handle submenu item clicks
         const submenuItems = document.querySelectorAll('.submenu-item');
+        const regularMenuItems = document.querySelectorAll('.menu-item:not(.expandable)');
 
         submenuItems.forEach(item => {
             item.addEventListener('click', (e) => {
@@ -392,6 +393,9 @@
 
                 // Remove highlight from all submenu items
                 submenuItems.forEach(si => si.classList.remove('highlight'));
+
+                // Remove active state from all regular menu items
+                regularMenuItems.forEach(mi => mi.classList.remove('active'));
 
                 // Add highlight to clicked item
                 item.classList.add('highlight');
@@ -401,12 +405,13 @@
         });
 
         // Handle regular menu item clicks
-        const regularMenuItems = document.querySelectorAll('.menu-item:not(.expandable)');
-
         regularMenuItems.forEach(item => {
             item.addEventListener('click', () => {
                 // Remove active state from all menu items
                 regularMenuItems.forEach(mi => mi.classList.remove('active'));
+
+                // Remove highlight from all submenu items
+                submenuItems.forEach(si => si.classList.remove('highlight'));
 
                 // Add active state to clicked item
                 item.classList.add('active');

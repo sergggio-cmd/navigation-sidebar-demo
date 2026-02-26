@@ -34,6 +34,7 @@
         .nav-sidebar {
             position: relative;
             width: 304px;
+            height: 1024px;
             background: white;
             border: 1px solid #e0e0e0;
             border-radius: 8px;
@@ -41,31 +42,8 @@
             display: flex;
             flex-direction: column;
             gap: 8px;
-        }
-
-        .collapse-btn {
-            position: absolute;
-            right: -16px;
-            top: 24px;
-            width: 32px;
-            height: 32px;
-            background: white;
-            border: 1px solid #e0e0e0;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s;
-            color: #28333f;
-        }
-
-        .collapse-btn:hover {
-            background: #f5f5f5;
-        }
-
-        .collapse-btn svg {
-            color: inherit;
+            overflow-y: auto;
+            z-index: 1;
         }
 
         .menu-item {
@@ -130,15 +108,22 @@
         }
 
         .submenu {
-            display: none;
+            display: flex;
             flex-direction: column;
             gap: 0;
             padding-left: 28px;
-            margin-top: 4px;
+            margin: 0;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out, margin 0.3s ease-out;
         }
 
         .submenu.show {
-            display: flex;
+            max-height: 500px;
+            opacity: 1;
+            margin: 8px 0 0 0;
+            transition: max-height 0.4s ease-in, opacity 0.3s ease-in, margin 0.3s ease-in;
         }
 
         .submenu-item {
@@ -173,12 +158,6 @@
         <h1>Navigation Sidebar Demo</h1>
 
         <nav class="nav-sidebar">
-            <button class="collapse-btn" aria-label="Collapse sidebar">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </button>
-
             <div class="menu-item">
                 <div class="menu-item-icon">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -325,17 +304,33 @@
     </div>
 
     <script>
-        // Handle expandable menu items
+        // Handle expandable menu items (accordion behavior - only one open at a time)
         const expandableItems = document.querySelectorAll('.menu-item.expandable');
 
         expandableItems.forEach(item => {
             item.addEventListener('click', () => {
                 const submenuId = item.getAttribute('data-submenu');
                 const submenu = document.getElementById(submenuId);
+                const isCurrentlyExpanded = item.classList.contains('expanded');
 
-                // Toggle expanded state
-                item.classList.toggle('expanded');
-                submenu.classList.toggle('show');
+                // Close all other expandable items
+                expandableItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        const otherSubmenuId = otherItem.getAttribute('data-submenu');
+                        const otherSubmenu = document.getElementById(otherSubmenuId);
+                        otherItem.classList.remove('expanded');
+                        otherSubmenu.classList.remove('show');
+                    }
+                });
+
+                // Toggle current item
+                if (isCurrentlyExpanded) {
+                    item.classList.remove('expanded');
+                    submenu.classList.remove('show');
+                } else {
+                    item.classList.add('expanded');
+                    submenu.classList.add('show');
+                }
             });
         });
 
@@ -369,14 +364,6 @@
 
                 console.log('Selected:', item.querySelector('.menu-item-text').textContent);
             });
-        });
-
-        // Handle collapse button
-        const collapseBtn = document.querySelector('.collapse-btn');
-        const sidebar = document.querySelector('.nav-sidebar');
-
-        collapseBtn.addEventListener('click', () => {
-            console.log('Collapse button clicked - implement collapse functionality here');
         });
 
         // Initialize with Interest section expanded

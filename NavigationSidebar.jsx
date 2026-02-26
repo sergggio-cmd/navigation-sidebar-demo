@@ -1,0 +1,275 @@
+import React, { useState, useEffect } from 'react';
+import './NavigationSidebar.css';
+
+const NavigationSidebar = () => {
+  const [expandedMenu, setExpandedMenu] = useState('interest');
+  const [selectedItem, setSelectedItem] = useState('tesla');
+
+  const handleMenuClick = (menuId) => {
+    setExpandedMenu(expandedMenu === menuId ? null : menuId);
+  };
+
+  const handleMainItemClick = (itemId) => {
+    setSelectedItem(itemId);
+  };
+
+  const handleSubmenuItemClick = (itemId) => {
+    setSelectedItem(itemId);
+  };
+
+  return (
+    <nav className="nav-sidebar">
+      {/* Home */}
+      <div
+        className={`menu-item ${selectedItem === 'home' ? 'active' : ''}`}
+        onClick={() => handleMainItemClick('home')}
+      >
+        <div className="menu-item-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <mask id="mask-home" style={{maskType: 'alpha'}} maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
+              <path d="M13.8838 6.61562L8.88376 1.61562C8.64935 1.38128 8.33146 1.24963 8.00001 1.24963C7.66855 1.24963 7.35067 1.38128 7.11626 1.61562L2.11626 6.61562C1.99971 6.73145 1.90732 6.86927 1.84445 7.02108C1.78158 7.17289 1.74948 7.33568 1.75001 7.49999V13.5C1.75001 13.6989 1.82902 13.8897 1.96968 14.0303C2.11033 14.171 2.30109 14.25 2.50001 14.25H6.50001C6.69892 14.25 6.88968 14.171 7.03034 14.0303C7.17099 13.8897 7.25001 13.6989 7.25001 13.5V10.25H8.75001V13.5C8.75001 13.6989 8.82902 13.8897 8.96968 14.0303C9.11033 14.171 9.30109 14.25 9.50001 14.25H13.5C13.6989 14.25 13.8897 14.171 14.0303 14.0303C14.171 13.8897 14.25 13.6989 14.25 13.5V7.49999C14.2505 7.33568 14.2184 7.17289 14.1556 7.02108C14.0927 6.86927 14.0003 6.73145 13.8838 6.61562ZM12.75 12.75H10.25V9.49999C10.25 9.30108 10.171 9.11031 10.0303 8.96966C9.88968 8.82901 9.69892 8.74999 9.50001 8.74999H6.50001C6.30109 8.74999 6.11033 8.82901 5.96968 8.96966C5.82902 9.11031 5.75001 9.30108 5.75001 9.49999V12.75H3.25001V7.60312L8.00001 2.85312L12.75 7.60312V12.75Z" fill="#2F2F37"/>
+            </mask>
+            <g mask="url(#mask-home)">
+              <rect width="16" height="16" fill="#1E1E24"/>
+            </g>
+          </svg>
+        </div>
+        <div className="menu-item-text">Home</div>
+      </div>
+
+      {/* Search Builder */}
+      <div
+        className={`menu-item ${selectedItem === 'search' ? 'active' : ''}`}
+        onClick={() => handleMainItemClick('search')}
+      >
+        <div className="menu-item-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <mask id="mask-search-builder" style={{maskType: 'alpha'}} maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
+              <path d="M6.80865 1.30286C8.25378 1.25558 9.66298 1.75966 10.7501 2.71301C11.8371 3.66636 12.5204 4.99775 12.6622 6.43665C12.8039 7.87563 12.393 9.31492 11.5128 10.462L11.4796 10.505L11.5186 10.5441L14.4864 13.5138L14.4903 13.5167C14.5536 13.5804 14.6034 13.6564 14.6378 13.7394C14.6723 13.8227 14.6904 13.9119 14.6905 14.0021C14.6905 14.0925 14.6723 14.1822 14.6378 14.2657C14.6032 14.3492 14.5531 14.4255 14.4893 14.4894C14.4254 14.5533 14.3492 14.6042 14.2657 14.6388C14.1822 14.6734 14.0924 14.6915 14.002 14.6915C13.9116 14.6915 13.8219 14.6734 13.7383 14.6388C13.6548 14.6042 13.5787 14.5533 13.5147 14.4894L10.5049 11.4796L10.462 11.5128C9.31486 12.3931 7.87557 12.8039 6.43658 12.6622C4.99769 12.5205 3.66629 11.8372 2.71295 10.7501C1.7596 9.66304 1.25552 8.25384 1.3028 6.80872C1.35009 5.36354 1.94539 3.99034 2.96783 2.9679C3.99027 1.94546 5.36348 1.35015 6.80865 1.30286ZM7.84088 2.77063C7.00446 2.60433 6.13755 2.6894 5.34967 3.01575C4.56166 3.34215 3.88799 3.89543 3.41412 4.60461C2.94043 5.31372 2.68756 6.14735 2.68756 7.00012C2.68874 8.14348 3.14373 9.23949 3.95221 10.048C4.76069 10.8564 5.85673 11.3114 7.00006 11.3126C7.85282 11.3126 8.68648 11.0598 9.39557 10.5861C10.1047 10.1122 10.658 9.4385 10.9844 8.65051C11.3108 7.86251 11.396 6.99487 11.2296 6.15833C11.0631 5.32193 10.6519 4.55334 10.0489 3.95032C9.44584 3.34742 8.67724 2.93699 7.84088 2.77063Z" fill="#2F2F37" stroke="#1A1A1A" strokeWidth="0.125"/>
+            </mask>
+            <g mask="url(#mask-search-builder)">
+              <rect width="16" height="16" fill="#1E1E24"/>
+            </g>
+          </svg>
+        </div>
+        <div className="menu-item-text">Search Builder</div>
+      </div>
+
+      {/* Alerts */}
+      <div
+        className={`menu-item ${selectedItem === 'alerts' ? 'active' : ''}`}
+        onClick={() => handleMainItemClick('alerts')}
+      >
+        <div className="menu-item-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <mask id="mask-bell-alerts" style={{maskType: 'alpha'}} maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
+              <path d="M14.0806 10.3706C13.5381 9.4375 13.25 8.09812 13.25 6.5C13.25 5.10761 12.6969 3.77226 11.7123 2.78769C10.7278 1.80312 9.3924 1.25 8.00002 1.25C6.60763 1.25 5.27227 1.80312 4.28771 2.78769C3.30314 3.77226 2.75002 5.10761 2.75002 6.5C2.75002 8.09875 2.46314 9.4375 1.92064 10.3706C1.80994 10.561 1.75126 10.7771 1.7505 10.9972C1.74973 11.2174 1.8069 11.4339 1.91627 11.625C2.02494 11.8162 2.18268 11.9749 2.3732 12.0848C2.56371 12.1947 2.7801 12.2517 3.00002 12.25H5.26127C5.32328 12.9335 5.63865 13.5691 6.14541 14.032C6.65217 14.4949 7.31369 14.7515 8.00002 14.7515C8.68635 14.7515 9.34787 14.4949 9.85463 14.032C10.3614 13.5691 10.6768 12.9335 10.7388 12.25H13C13.2196 12.2514 13.4356 12.1942 13.6258 12.0843C13.8159 11.9745 13.9734 11.8159 14.0819 11.625C14.1917 11.4342 14.2494 11.2178 14.2492 10.9976C14.249 10.7775 14.1909 10.5612 14.0806 10.3706ZM8.00002 13.25C7.71185 13.2501 7.43252 13.1506 7.20929 12.9683C6.98606 12.7861 6.83265 12.5323 6.77502 12.25H9.22502C9.16739 12.5323 9.01397 12.7861 8.79074 12.9683C8.56751 13.1506 8.28818 13.2501 8.00002 13.25ZM3.41627 10.75C3.96939 9.625 4.25002 8.19625 4.25002 6.5C4.25002 5.50544 4.64511 4.55161 5.34837 3.84835C6.05163 3.14509 7.00546 2.75 8.00002 2.75C8.99458 2.75 9.94841 3.14509 10.6517 3.84835C11.3549 4.55161 11.75 5.50544 11.75 6.5C11.75 8.19562 12.03 9.625 12.5831 10.75H3.41627Z" fill="#2F2F37"/>
+            </mask>
+            <g mask="url(#mask-bell-alerts)">
+              <rect width="16" height="16" fill="#1E1E24"/>
+            </g>
+          </svg>
+        </div>
+        <div className="menu-item-text">Alerts</div>
+      </div>
+
+      {/* Saved */}
+      <div
+        className={`menu-item ${selectedItem === 'saved' ? 'active' : ''}`}
+        onClick={() => handleMainItemClick('saved')}
+      >
+        <div className="menu-item-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <mask id="mask-bookmark-saved" style={{maskType: 'alpha'}} maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
+              <path d="M11.5 1.75H4.5C4.16848 1.75 3.85054 1.8817 3.61612 2.11612C3.3817 2.35054 3.25 2.66848 3.25 3V14C3.24996 14.1339 3.28576 14.2654 3.35369 14.3808C3.42162 14.4961 3.51921 14.5912 3.63631 14.6562C3.75342 14.7211 3.88577 14.7535 4.01962 14.75C4.15348 14.7465 4.28395 14.7072 4.3975 14.6362L7.99937 12.3862L11.6025 14.6362C11.716 14.7072 11.8465 14.7465 11.9804 14.75C12.1142 14.7535 12.2466 14.7211 12.3637 14.6562C12.4808 14.5912 12.5784 14.4961 12.6463 14.3808C12.7142 14.2654 12.75 14.1339 12.75 14V3C12.75 2.66848 12.6183 2.35054 12.3839 2.11612C12.1495 1.8817 11.8315 1.75 11.5 1.75ZM11.25 12.6469L8.39688 10.8638C8.27768 10.7893 8.13994 10.7497 7.99937 10.7497C7.85881 10.7497 7.72107 10.7893 7.60187 10.8638L4.75 12.6469V3.25H11.25V12.6469Z" fill="#2F2F37"/>
+            </mask>
+            <g mask="url(#mask-bookmark-saved)">
+              <rect width="16" height="16" fill="#1E1E24"/>
+            </g>
+          </svg>
+        </div>
+        <div className="menu-item-text">Saved</div>
+      </div>
+
+      {/* Interest Dropdown */}
+      <div
+        className={`menu-item expandable ${expandedMenu === 'interest' ? 'expanded' : ''}`}
+        onClick={() => handleMenuClick('interest')}
+      >
+        <div className="menu-item-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <mask id="mask-star-interest" style={{maskType: 'alpha'}} maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
+              <path d="M15.1875 6.00003C15.11 5.76085 14.9633 5.55004 14.7659 5.39428C14.5686 5.23852 14.3294 5.14482 14.0788 5.12503L10.5419 4.83941L9.1769 1.53878C9.08097 1.3055 8.91788 1.106 8.70834 0.965602C8.49879 0.825203 8.25225 0.750244 8.00002 0.750244C7.74779 0.750244 7.50125 0.825203 7.29171 0.965602C7.08217 1.106 6.91908 1.3055 6.82315 1.53878L5.4594 4.84003L1.92252 5.12503C1.67141 5.14574 1.43202 5.24021 1.23444 5.39656C1.03686 5.55292 0.889898 5.76418 0.812025 6.00381C0.734153 6.24344 0.728844 6.50074 0.796766 6.74337C0.864687 6.98601 1.00281 7.20316 1.19377 7.36753L3.89252 9.69503L3.06752 13.1763C3.00735 13.4217 3.02159 13.6795 3.10842 13.9168C3.19524 14.1542 3.35074 14.3603 3.5551 14.509C3.75946 14.6576 4.00343 14.7421 4.25597 14.7516C4.5085 14.7612 4.75815 14.6953 4.97315 14.5625L8.00002 12.6994L11.0269 14.5625C11.2418 14.6945 11.4911 14.7596 11.7431 14.7498C11.9951 14.74 12.2385 14.6557 12.4426 14.5075C12.6466 14.3592 12.8021 14.1538 12.8893 13.9172C12.9765 13.6805 12.9916 13.4233 12.9325 13.1782L12.1075 9.6969L14.8063 7.3694C14.9984 7.20463 15.1372 6.98649 15.2051 6.74267C15.2729 6.49886 15.2668 6.24037 15.1875 6.00003ZM10.7831 8.85628C10.6791 8.946 10.6017 9.06258 10.5593 9.19329C10.517 9.32401 10.5114 9.46384 10.5431 9.59753L11.3488 13L8.39315 11.1825C8.27493 11.1098 8.13884 11.0712 8.00002 11.0712C7.86121 11.0712 7.72512 11.1098 7.6069 11.1825L4.65127 13L5.4569 9.60003C5.48863 9.46635 5.48303 9.32651 5.44071 9.19579C5.39838 9.06508 5.32096 8.9485 5.2169 8.85878L2.57502 6.57753L6.03752 6.29815C6.17531 6.28708 6.30736 6.23815 6.41909 6.15675C6.53082 6.07536 6.61787 5.96467 6.67065 5.8369L8.00002 2.61815L9.3294 5.8369C9.38217 5.96467 9.46923 6.07536 9.58096 6.15675C9.69269 6.23815 9.82473 6.28708 9.96252 6.29815L13.425 6.57753L10.7831 8.85628Z" fill="#1A1A1A"/>
+            </mask>
+            <g mask="url(#mask-star-interest)">
+              <rect width="16" height="16" fill="#1E1E24"/>
+            </g>
+          </svg>
+        </div>
+        <div className="menu-item-text">Interest</div>
+        <div className="menu-item-arrow">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 6L8 10L12 6" stroke="#1E1E24" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </div>
+      </div>
+      <div className={`submenu ${expandedMenu === 'interest' ? 'show' : ''}`}>
+        <div
+          className={`submenu-item ${selectedItem === 'tesla' ? 'highlight' : ''}`}
+          onClick={(e) => { e.stopPropagation(); handleSubmenuItemClick('tesla'); }}
+        >
+          <div className="submenu-item-text">Tesla Inc.</div>
+        </div>
+        <div
+          className={`submenu-item ${selectedItem === 'nvidia' ? 'highlight' : ''}`}
+          onClick={(e) => { e.stopPropagation(); handleSubmenuItemClick('nvidia'); }}
+        >
+          <div className="submenu-item-text">NVIDIA Corporation</div>
+        </div>
+        <div
+          className={`submenu-item ${selectedItem === 'openai' ? 'highlight' : ''}`}
+          onClick={(e) => { e.stopPropagation(); handleSubmenuItemClick('openai'); }}
+        >
+          <div className="submenu-item-text">OpenAI LLC</div>
+        </div>
+      </div>
+
+      {/* Newsletters Dropdown */}
+      <div
+        className={`menu-item expandable ${expandedMenu === 'newsletters' ? 'expanded' : ''}`}
+        onClick={() => handleMenuClick('newsletters')}
+      >
+        <div className="menu-item-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <mask id="mask-newspaper-newsletters" style={{maskType: 'alpha'}} maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
+              <path d="M5.75 6.75C5.75 6.55109 5.82902 6.36032 5.96967 6.21967C6.11032 6.07902 6.30109 6 6.5 6H11C11.1989 6 11.3897 6.07902 11.5303 6.21967C11.671 6.36032 11.75 6.55109 11.75 6.75C11.75 6.94891 11.671 7.13968 11.5303 7.28033C11.3897 7.42098 11.1989 7.5 11 7.5H6.5C6.30109 7.5 6.11032 7.42098 5.96967 7.28033C5.82902 7.13968 5.75 6.94891 5.75 6.75ZM6.5 10H11C11.1989 10 11.3897 9.92098 11.5303 9.78033C11.671 9.63968 11.75 9.44891 11.75 9.25C11.75 9.05109 11.671 8.86032 11.5303 8.71967C11.3897 8.57902 11.1989 8.5 11 8.5H6.5C6.30109 8.5 6.11032 8.57902 5.96967 8.71967C5.82902 8.86032 5.75 9.05109 5.75 9.25C5.75 9.44891 5.82902 9.63968 5.96967 9.78033C6.11032 9.92098 6.30109 10 6.5 10ZM14.75 4V11.5C14.75 11.7298 14.7047 11.9574 14.6168 12.1697C14.5288 12.382 14.3999 12.5749 14.2374 12.7374C14.0749 12.8999 13.882 13.0288 13.6697 13.1168C13.4574 13.2047 13.2298 13.25 13 13.25H2.25C1.71957 13.25 1.21086 13.0393 0.835786 12.6642C0.460714 12.2891 0.25 11.7804 0.25 11.25V5.5C0.25 5.30109 0.329018 5.11032 0.46967 4.96967C0.610322 4.82902 0.801088 4.75 1 4.75C1.19891 4.75 1.38968 4.82902 1.53033 4.96967C1.67098 5.11032 1.75 5.30109 1.75 5.5V11.25C1.75 11.3826 1.80268 11.5098 1.89645 11.6036C1.99021 11.6973 2.11739 11.75 2.25 11.75C2.38261 11.75 2.50979 11.6973 2.60355 11.6036C2.69732 11.5098 2.75 11.3826 2.75 11.25V4C2.75 3.66848 2.8817 3.35054 3.11612 3.11612C3.35054 2.8817 3.66848 2.75 4 2.75H13.5C13.8315 2.75 14.1495 2.8817 14.3839 3.11612C14.6183 3.35054 14.75 3.66848 14.75 4ZM13.25 4.25H4.25V11.25C4.25033 11.4186 4.22933 11.5866 4.1875 11.75H13C13.0663 11.75 13.1299 11.7237 13.1768 11.6768C13.2237 11.6299 13.25 11.5663 13.25 11.5V4.25Z" fill="#1A1A1A"/>
+            </mask>
+            <g mask="url(#mask-newspaper-newsletters)">
+              <rect width="16" height="16" fill="#1E1E24"/>
+            </g>
+          </svg>
+        </div>
+        <div className="menu-item-text">Newsletters</div>
+        <div className="menu-item-arrow">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 6L8 10L12 6" stroke="#1E1E24" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </div>
+      </div>
+      <div className={`submenu ${expandedMenu === 'newsletters' ? 'show' : ''}`}>
+        <div
+          className={`submenu-item ${selectedItem === 'newsletter-builder' ? 'highlight' : ''}`}
+          onClick={(e) => { e.stopPropagation(); handleSubmenuItemClick('newsletter-builder'); }}
+        >
+          <div className="submenu-item-text">Newsletter Builder</div>
+        </div>
+        <div
+          className={`submenu-item ${selectedItem === 'view-newsletters' ? 'highlight' : ''}`}
+          onClick={(e) => { e.stopPropagation(); handleSubmenuItemClick('view-newsletters'); }}
+        >
+          <div className="submenu-item-text">View Newsletters</div>
+        </div>
+      </div>
+
+      {/* Companies/Markets Dropdown */}
+      <div
+        className={`menu-item expandable ${expandedMenu === 'companies' ? 'expanded' : ''}`}
+        onClick={() => handleMenuClick('companies')}
+      >
+        <div className="menu-item-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <mask id="mask-chart-companies" style={{maskType: 'alpha'}} maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
+              <path d="M14.75 13C14.75 13.1989 14.671 13.3897 14.5303 13.5303C14.3897 13.671 14.1989 13.75 14 13.75H2C1.80109 13.75 1.61032 13.671 1.46967 13.5303C1.32902 13.3897 1.25 13.1989 1.25 13V3C1.25 2.80109 1.32902 2.61032 1.46967 2.46967C1.61032 2.32902 1.80109 2.25 2 2.25C2.19891 2.25 2.38968 2.32902 2.53033 2.46967C2.67098 2.61032 2.75 2.80109 2.75 3V9.1875L5.46938 6.4675C5.53905 6.39758 5.62185 6.3421 5.71301 6.30425C5.80418 6.26639 5.90191 6.24691 6.00063 6.24691C6.09934 6.24691 6.19708 6.26639 6.28824 6.30425C6.3794 6.3421 6.4622 6.39758 6.53188 6.4675L8 7.9375L10.6875 5.25H10C9.80109 5.25 9.61032 5.17098 9.46967 5.03033C9.32902 4.88968 9.25 4.69891 9.25 4.5C9.25 4.30109 9.32902 4.11032 9.46967 3.96967C9.61032 3.82902 9.80109 3.75 10 3.75H12.5C12.6989 3.75 12.8897 3.82902 13.0303 3.96967C13.171 4.11032 13.25 4.30109 13.25 4.5V7C13.25 7.19891 13.171 7.38968 13.0303 7.53033C12.8897 7.67098 12.6989 7.75 12.5 7.75C12.3011 7.75 12.1103 7.67098 11.9697 7.53033C11.829 7.38968 11.75 7.19891 11.75 7V6.3125L8.53063 9.5325C8.46095 9.60242 8.37815 9.6579 8.28699 9.69575C8.19583 9.73361 8.09809 9.75309 7.99937 9.75309C7.90066 9.75309 7.80292 9.73361 7.71176 9.69575C7.6206 9.6579 7.5378 9.60242 7.46812 9.5325L6 8.0625L2.75 11.3125V12.25H14C14.1989 12.25 14.3897 12.329 14.5303 12.4697C14.671 12.6103 14.75 12.8011 14.75 13Z" fill="#1A1A1A"/>
+            </mask>
+            <g mask="url(#mask-chart-companies)">
+              <rect width="16" height="16" fill="#1E1E24"/>
+            </g>
+          </svg>
+        </div>
+        <div className="menu-item-text">Companies/Markets</div>
+        <div className="menu-item-arrow">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 6L8 10L12 6" stroke="#1E1E24" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </div>
+      </div>
+      <div className={`submenu ${expandedMenu === 'companies' ? 'show' : ''}`}>
+        <div
+          className={`submenu-item ${selectedItem === 'companies-screening' ? 'highlight' : ''}`}
+          onClick={(e) => { e.stopPropagation(); handleSubmenuItemClick('companies-screening'); }}
+        >
+          <div className="submenu-item-text">Companies Screening</div>
+        </div>
+        <div
+          className={`submenu-item ${selectedItem === 'executives' ? 'highlight' : ''}`}
+          onClick={(e) => { e.stopPropagation(); handleSubmenuItemClick('executives'); }}
+        >
+          <div className="submenu-item-text">Executives</div>
+        </div>
+        <div
+          className={`submenu-item ${selectedItem === 'quotes' ? 'highlight' : ''}`}
+          onClick={(e) => { e.stopPropagation(); handleSubmenuItemClick('quotes'); }}
+        >
+          <div className="submenu-item-text">Quotes</div>
+        </div>
+        <div
+          className={`submenu-item ${selectedItem === 'market-charts' ? 'highlight' : ''}`}
+          onClick={(e) => { e.stopPropagation(); handleSubmenuItemClick('market-charts'); }}
+        >
+          <div className="submenu-item-text">Market Data Charts</div>
+        </div>
+      </div>
+
+      {/* Administrator Dropdown */}
+      <div
+        className={`menu-item expandable ${expandedMenu === 'administrator' ? 'expanded' : ''}`}
+        onClick={() => handleMenuClick('administrator')}
+      >
+        <div className="menu-item-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <mask id="mask-user-gear-admin" style={{maskType: 'alpha'}} maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
+              <path d="M10.5981 2.88188C10.6597 2.69276 10.7938 2.53583 10.971 2.44558C11.1482 2.35533 11.354 2.33916 11.5431 2.40063L11.75 2.4675V2.25C11.75 2.05109 11.829 1.86032 11.9697 1.71967C12.1103 1.57902 12.3011 1.5 12.5 1.5C12.6989 1.5 12.8897 1.57902 13.0303 1.71967C13.171 1.86032 13.25 2.05109 13.25 2.25V2.4675L13.4569 2.40063C13.5511 2.36809 13.6508 2.35465 13.7502 2.36109C13.8496 2.36753 13.9468 2.39372 14.036 2.43813C14.1252 2.48253 14.2047 2.54427 14.2697 2.61973C14.3348 2.69518 14.3842 2.78285 14.415 2.87761C14.4458 2.97237 14.4574 3.07232 14.4492 3.17162C14.4409 3.27092 14.413 3.36758 14.3669 3.45595C14.3209 3.54433 14.2577 3.62264 14.1811 3.68633C14.1045 3.75002 14.0159 3.7978 13.9206 3.82688L13.7138 3.89438L13.8388 4.07063C13.8999 4.15006 13.9445 4.24095 13.9699 4.33791C13.9953 4.43488 14.001 4.53595 13.9867 4.63517C13.9724 4.73438 13.9383 4.82972 13.8865 4.91554C13.8348 5.00137 13.7663 5.07594 13.6852 5.13485C13.6041 5.19377 13.512 5.23582 13.4144 5.25854C13.3167 5.28126 13.2155 5.28418 13.1168 5.26712C13.018 5.25006 12.9236 5.21337 12.8393 5.15923C12.7549 5.10508 12.6823 5.03458 12.6256 4.95188L12.5 4.77625L12.375 4.95188C12.3184 5.03458 12.2457 5.10508 12.1614 5.15923C12.077 5.21337 11.9826 5.25006 11.8839 5.26712C11.7851 5.28418 11.6839 5.28126 11.5863 5.25854C11.4886 5.23582 11.3965 5.19377 11.3154 5.13485C11.2343 5.07594 11.1659 5.00137 11.1141 4.91554C11.0623 4.82972 11.0282 4.73438 11.0139 4.63517C10.9996 4.53595 11.0053 4.43488 11.0307 4.33791C11.0561 4.24095 11.1007 4.15006 11.1619 4.07063L11.2869 3.89438L11.08 3.82688C10.9863 3.79647 10.8995 3.74791 10.8246 3.68397C10.7497 3.62002 10.6881 3.54194 10.6433 3.45419C10.5986 3.36644 10.5716 3.27073 10.5638 3.17253C10.556 3.07433 10.5677 2.97556 10.5981 2.88188ZM14.75 8C14.75 9.33502 14.3541 10.6401 13.6124 11.7501C12.8707 12.8601 11.8165 13.7253 10.5831 14.2362C9.34971 14.7471 7.99251 14.8808 6.68314 14.6203C5.37377 14.3599 4.17104 13.717 3.22703 12.773C2.28303 11.829 1.64015 10.6262 1.3797 9.31686C1.11925 8.00749 1.25292 6.65029 1.76382 5.41689C2.27471 4.18349 3.13987 3.12928 4.2499 2.38758C5.35994 1.64588 6.66498 1.25 8 1.25C8.37693 1.24992 8.75322 1.28107 9.125 1.34313C9.32118 1.37628 9.49615 1.486 9.61143 1.64816C9.72671 1.81032 9.77284 2.01164 9.73969 2.20781C9.70654 2.40399 9.59681 2.57896 9.43465 2.69424C9.27249 2.80952 9.07118 2.85565 8.875 2.8225C8.58584 2.77423 8.29317 2.74998 8 2.75C7.01445 2.74933 6.04864 3.02629 5.21321 3.54915C4.37778 4.07201 3.70653 4.81962 3.27635 5.70633C2.84617 6.59305 2.67446 7.583 2.78089 8.5628C2.88732 9.54259 3.26759 10.4726 3.87813 11.2463C4.36425 10.628 4.98386 10.1276 5.69063 9.7825C5.2402 9.32637 4.93472 8.74722 4.81262 8.1179C4.69053 7.48859 4.75726 6.83722 5.00444 6.24574C5.25162 5.65426 5.6682 5.1491 6.20177 4.79379C6.73535 4.43848 7.36208 4.2489 8.00313 4.2489C8.64418 4.2489 9.27091 4.43848 9.80448 4.79379C10.3381 5.1491 10.7546 5.65426 11.0018 6.24574C11.249 6.83722 11.3157 7.48859 11.1936 8.1179C11.0715 8.74722 10.7661 9.32637 10.3156 9.7825C11.0224 10.1276 11.642 10.628 12.1281 11.2463C12.8573 10.3216 13.2527 9.17761 13.25 8C13.25 7.70683 13.2257 7.41417 13.1775 7.125C13.1444 6.92882 13.1905 6.72751 13.3058 6.56535C13.421 6.40319 13.596 6.29346 13.7922 6.26031C13.9884 6.22716 14.1897 6.2733 14.3518 6.38857C14.514 6.50385 14.6237 6.67882 14.6569 6.875C14.719 7.24678 14.7501 7.62307 14.75 8ZM8 9.25C8.34612 9.25 8.68446 9.14736 8.97225 8.95507C9.26004 8.76278 9.48434 8.48947 9.61679 8.1697C9.74925 7.84993 9.7839 7.49806 9.71638 7.15859C9.64885 6.81912 9.48218 6.50731 9.23744 6.26256C8.9927 6.01782 8.68088 5.85115 8.34141 5.78363C8.00194 5.7161 7.65008 5.75076 7.33031 5.88321C7.01054 6.01566 6.73722 6.23997 6.54493 6.52775C6.35264 6.81554 6.25 7.15388 6.25 7.5C6.25 7.96413 6.43438 8.40925 6.76257 8.73744C7.09075 9.06563 7.53587 9.25 8 9.25ZM8 13.25C9.08464 13.2508 10.1426 12.9137 11.0269 12.2856C10.6787 11.8096 10.2232 11.4223 9.69722 11.1554C9.17128 10.8885 8.5898 10.7493 8 10.7493C7.4102 10.7493 6.82872 10.8885 6.30279 11.1554C5.77685 11.4223 5.3213 11.8096 4.97313 12.2856C5.85741 12.9137 6.91536 13.2508 8 13.25Z" fill="#1A1A1A"/>
+            </mask>
+            <g mask="url(#mask-user-gear-admin)">
+              <rect width="16" height="16" fill="#1E1E24"/>
+            </g>
+          </svg>
+        </div>
+        <div className="menu-item-text">Administrator</div>
+        <div className="menu-item-arrow">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 6L8 10L12 6" stroke="#1E1E24" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </div>
+      </div>
+      <div className={`submenu ${expandedMenu === 'administrator' ? 'show' : ''}`}>
+        <div
+          className={`submenu-item ${selectedItem === 'group-manager' ? 'highlight' : ''}`}
+          onClick={(e) => { e.stopPropagation(); handleSubmenuItemClick('group-manager'); }}
+        >
+          <div className="submenu-item-text">Group Manager</div>
+        </div>
+        <div
+          className={`submenu-item ${selectedItem === 'custom-billing' ? 'highlight' : ''}`}
+          onClick={(e) => { e.stopPropagation(); handleSubmenuItemClick('custom-billing'); }}
+        >
+          <div className="submenu-item-text">Custom Client Billing</div>
+        </div>
+        <div
+          className={`submenu-item ${selectedItem === 'reader-external' ? 'highlight' : ''}`}
+          onClick={(e) => { e.stopPropagation(); handleSubmenuItemClick('reader-external'); }}
+        >
+          <div className="submenu-item-text">Reader (External)</div>
+        </div>
+        <div
+          className={`submenu-item ${selectedItem === 'registration' ? 'highlight' : ''}`}
+          onClick={(e) => { e.stopPropagation(); handleSubmenuItemClick('registration'); }}
+        >
+          <div className="submenu-item-text">Registration</div>
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+export default NavigationSidebar;

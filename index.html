@@ -75,12 +75,14 @@
             flex-shrink: 0;
         }
 
+        .menu-item-icon {
+            color: #28333f;
+        }
+
         .menu-item-icon svg {
             width: 16px;
             height: 16px;
-            color: #28333f;
             display: block;
-            fill: none;
         }
 
         .menu-item-text {
@@ -100,12 +102,14 @@
             transition: transform 0.2s;
         }
 
+        .menu-item-arrow {
+            color: #28333f;
+        }
+
         .menu-item-arrow svg {
             width: 16px;
             height: 16px;
-            color: #28333f;
             display: block;
-            fill: none;
         }
 
         .menu-item.expanded .menu-item-arrow {
@@ -158,83 +162,69 @@
         }
     </style>
 </head>
-<body>    <!-- SVG Sprite (hidden) -->
-    <svg style="display: none;" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-            <symbol id="icon-bell" viewBox="0 0 16 16">
-                <path d="M8 2C5.8 2 4 3.8 4 6V9L2.5 10.5V11.5H13.5V10.5L12 9V6C12 3.8 10.2 2 8 2Z" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M6.5 11.5C6.5 12.3284 7.17157 13 8 13C8.82843 13 9.5 12.3284 9.5 11.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-            </symbol>
-            <symbol id="icon-bookmark" viewBox="0 0 16 16">
-                <path d="M4.5 2.5H11.5V13.5L8 11L4.5 13.5V2.5Z" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-            </symbol>
-            <symbol id="icon-caret-down" viewBox="0 0 16 16">
-                <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-            </symbol>
-            <symbol id="icon-chart" viewBox="0 0 16 16">
-                <path d="M2.5 13L5.5 8L8 10.5L13.5 2.5M13.5 2.5H10M13.5 2.5V6" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-            </symbol>
-            <symbol id="icon-home" viewBox="0 0 16 16">
-                <path d="M2 8L8 2.5L14 8M4 6.5V13H7V10H9V13H12V6.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-            </symbol>
-            <symbol id="icon-newspaper" viewBox="0 0 16 16">
-                <rect x="2" y="3.5" width="12" height="9" rx="0.5" stroke="currentColor" stroke-width="1.25"/>
-                    <path d="M2 5.5H14M4.5 7.5H8M4.5 9.5H11" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/>
-            </symbol>
-            <symbol id="icon-search" viewBox="0 0 16 16">
-                <circle cx="7" cy="7" r="4" stroke="currentColor" stroke-width="1.25"/>
-                    <path d="M13.5 13.5L10.5 10.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/>
-            </symbol>
-            <symbol id="icon-star" viewBox="0 0 16 16">
-                <path d="M8 2L9.5 6H13.5L10 8.5L11.5 12.5L8 10L4.5 12.5L6 8.5L2.5 6H6.5L8 2Z" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-            </symbol>
-            <symbol id="icon-user-gear" viewBox="0 0 16 16">
-                <circle cx="8" cy="5.5" r="2.5" stroke="currentColor" stroke-width="1.25"/>
-                    <path d="M8 10.5C5.5 10.5 3.5 11.5 3.5 13M12.5 13C12.5 11.5 10.5 10.5 8 10.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/>
-                    <path d="M11 10.5L12 11.5L14 9.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-            </symbol>
-        </defs>
-    </svg>
-
+<body>
     <div class="demo-container">
         <h1>Navigation Sidebar Demo</h1>
 
         <nav class="nav-sidebar">
             <div class="menu-item">
                 <div class="menu-item-icon">
-                    <svg width="16" height="16"><use href="#icon-home"/></svg>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2 8L8 2.5L14 8M4 6.5V13H7V10H9V13H12V6.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                 </div>
                 <div class="menu-item-text">Home</div>
             </div>
 
             <div class="menu-item">
                 <div class="menu-item-icon">
-                    <svg width="16" height="16"><use href="#icon-search"/></svg>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="7" cy="7" r="4" stroke="currentColor" stroke-width="1.25"/>
+                        <path d="M13.5 13.5L10.5 10.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/>
+                    </svg>
                 </div>
                 <div class="menu-item-text">Search Builder</div>
             </div>
 
             <div class="menu-item">
                 <div class="menu-item-icon">
-                    <svg width="16" height="16"><use href="#icon-bell"/></svg>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <mask id="mask-bell-alerts" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
+                            <path d="M14.0806 10.3706C13.5381 9.4375 13.25 8.09812 13.25 6.5C13.25 5.10761 12.6969 3.77226 11.7123 2.78769C10.7278 1.80312 9.3924 1.25 8.00002 1.25C6.60763 1.25 5.27227 1.80312 4.28771 2.78769C3.30314 3.77226 2.75002 5.10761 2.75002 6.5C2.75002 8.09875 2.46314 9.4375 1.92064 10.3706C1.80994 10.561 1.75126 10.7771 1.7505 10.9972C1.74973 11.2174 1.8069 11.4339 1.91627 11.625C2.02494 11.8162 2.18268 11.9749 2.3732 12.0848C2.56371 12.1947 2.7801 12.2517 3.00002 12.25H5.26127C5.32328 12.9335 5.63865 13.5691 6.14541 14.032C6.65217 14.4949 7.31369 14.7515 8.00002 14.7515C8.68635 14.7515 9.34787 14.4949 9.85463 14.032C10.3614 13.5691 10.6768 12.9335 10.7388 12.25H13C13.2196 12.2514 13.4356 12.1942 13.6258 12.0843C13.8159 11.9745 13.9734 11.8159 14.0819 11.625C14.1917 11.4342 14.2494 11.2178 14.2492 10.9976C14.249 10.7775 14.1909 10.5612 14.0806 10.3706ZM8.00002 13.25C7.71185 13.2501 7.43252 13.1506 7.20929 12.9683C6.98606 12.7861 6.83265 12.5323 6.77502 12.25H9.22502C9.16739 12.5323 9.01397 12.7861 8.79074 12.9683C8.56751 13.1506 8.28818 13.2501 8.00002 13.25ZM3.41627 10.75C3.96939 9.625 4.25002 8.19625 4.25002 6.5C4.25002 5.50544 4.64511 4.55161 5.34837 3.84835C6.05163 3.14509 7.00546 2.75 8.00002 2.75C8.99458 2.75 9.94841 3.14509 10.6517 3.84835C11.3549 4.55161 11.75 5.50544 11.75 6.5C11.75 8.19562 12.03 9.625 12.5831 10.75H3.41627Z" fill="#2F2F37"/>
+                        </mask>
+                        <g mask="url(#mask-bell-alerts)">
+                            <rect width="16" height="16" fill="#1E1E24"/>
+                        </g>
+                    </svg>
                 </div>
                 <div class="menu-item-text">Alerts</div>
             </div>
 
             <div class="menu-item">
                 <div class="menu-item-icon">
-                    <svg width="16" height="16"><use href="#icon-bookmark"/></svg>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <mask id="mask-bookmark-saved" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
+                            <path d="M11.5 1.75H4.5C4.16848 1.75 3.85054 1.8817 3.61612 2.11612C3.3817 2.35054 3.25 2.66848 3.25 3V14C3.24996 14.1339 3.28576 14.2654 3.35369 14.3808C3.42162 14.4961 3.51921 14.5912 3.63631 14.6562C3.75342 14.7211 3.88577 14.7535 4.01962 14.75C4.15348 14.7465 4.28395 14.7072 4.3975 14.6362L7.99937 12.3862L11.6025 14.6362C11.716 14.7072 11.8465 14.7465 11.9804 14.75C12.1142 14.7535 12.2466 14.7211 12.3637 14.6562C12.4808 14.5912 12.5784 14.4961 12.6463 14.3808C12.7142 14.2654 12.75 14.1339 12.75 14V3C12.75 2.66848 12.6183 2.35054 12.3839 2.11612C12.1495 1.8817 11.8315 1.75 11.5 1.75ZM11.25 12.6469L8.39688 10.8638C8.27768 10.7893 8.13994 10.7497 7.99937 10.7497C7.85881 10.7497 7.72107 10.7893 7.60187 10.8638L4.75 12.6469V3.25H11.25V12.6469Z" fill="#2F2F37"/>
+                        </mask>
+                        <g mask="url(#mask-bookmark-saved)">
+                            <rect width="16" height="16" fill="#1E1E24"/>
+                        </g>
+                    </svg>
                 </div>
                 <div class="menu-item-text">Saved</div>
             </div>
 
             <div class="menu-item expandable" data-submenu="interest">
                 <div class="menu-item-icon">
-                    <svg width="16" height="16"><use href="#icon-star"/></svg>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 2L9.5 6H13.5L10 8.5L11.5 12.5L8 10L4.5 12.5L6 8.5L2.5 6H6.5L8 2Z" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                 </div>
                 <div class="menu-item-text">Interest</div>
                 <div class="menu-item-arrow">
-                    <svg width="16" height="16"><use href="#icon-caret-down"/></svg>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                 </div>
             </div>
             <div class="submenu" id="interest">
@@ -251,11 +241,16 @@
 
             <div class="menu-item expandable" data-submenu="newsletters">
                 <div class="menu-item-icon">
-                    <svg width="16" height="16"><use href="#icon-newspaper"/></svg>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="2" y="3.5" width="12" height="9" rx="0.5" stroke="currentColor" stroke-width="1.25"/>
+                        <path d="M2 5.5H14M4.5 7.5H8M4.5 9.5H11" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/>
+                    </svg>
                 </div>
                 <div class="menu-item-text">Newsletters</div>
                 <div class="menu-item-arrow">
-                    <svg width="16" height="16"><use href="#icon-caret-down"/></svg>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                 </div>
             </div>
             <div class="submenu" id="newsletters">
@@ -269,11 +264,20 @@
 
             <div class="menu-item expandable" data-submenu="companies">
                 <div class="menu-item-icon">
-                    <svg width="16" height="16"><use href="#icon-chart"/></svg>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <mask id="mask-chart-companies" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
+                            <path d="M14.75 13C14.75 13.1989 14.671 13.3897 14.5303 13.5303C14.3897 13.671 14.1989 13.75 14 13.75H2C1.80109 13.75 1.61032 13.671 1.46967 13.5303C1.32902 13.3897 1.25 13.1989 1.25 13V3C1.25 2.80109 1.32902 2.61032 1.46967 2.46967C1.61032 2.32902 1.80109 2.25 2 2.25C2.19891 2.25 2.38968 2.32902 2.53033 2.46967C2.67098 2.61032 2.75 2.80109 2.75 3V9.1875L5.46938 6.4675C5.53905 6.39758 5.62185 6.3421 5.71301 6.30425C5.80418 6.26639 5.90191 6.24691 6.00063 6.24691C6.09934 6.24691 6.19708 6.26639 6.28824 6.30425C6.3794 6.3421 6.4622 6.39758 6.53188 6.4675L8 7.9375L10.6875 5.25H10C9.80109 5.25 9.61032 5.17098 9.46967 5.03033C9.32902 4.88968 9.25 4.69891 9.25 4.5C9.25 4.30109 9.32902 4.11032 9.46967 3.96967C9.61032 3.82902 9.80109 3.75 10 3.75H12.5C12.6989 3.75 12.8897 3.82902 13.0303 3.96967C13.171 4.11032 13.25 4.30109 13.25 4.5V7C13.25 7.19891 13.171 7.38968 13.0303 7.53033C12.8897 7.67098 12.6989 7.75 12.5 7.75C12.3011 7.75 12.1103 7.67098 11.9697 7.53033C11.829 7.38968 11.75 7.19891 11.75 7V6.3125L8.53063 9.5325C8.46095 9.60242 8.37815 9.6579 8.28699 9.69575C8.19583 9.73361 8.09809 9.75309 7.99937 9.75309C7.90066 9.75309 7.80292 9.73361 7.71176 9.69575C7.6206 9.6579 7.5378 9.60242 7.46812 9.5325L6 8.0625L2.75 11.3125V12.25H14C14.1989 12.25 14.3897 12.329 14.5303 12.4697C14.671 12.6103 14.75 12.8011 14.75 13Z" fill="#1A1A1A"/>
+                        </mask>
+                        <g mask="url(#mask-chart-companies)">
+                            <rect width="16" height="16" fill="#1E1E24"/>
+                        </g>
+                    </svg>
                 </div>
                 <div class="menu-item-text">Companies/Markets</div>
                 <div class="menu-item-arrow">
-                    <svg width="16" height="16"><use href="#icon-caret-down"/></svg>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                 </div>
             </div>
             <div class="submenu" id="companies">
@@ -293,11 +297,20 @@
 
             <div class="menu-item expandable" data-submenu="administrator">
                 <div class="menu-item-icon">
-                    <svg width="16" height="16"><use href="#icon-user-gear"/></svg>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <mask id="mask-user-gear-admin" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
+                            <path d="M10.5981 2.88188C10.6597 2.69276 10.7938 2.53583 10.971 2.44558C11.1482 2.35533 11.354 2.33916 11.5431 2.40063L11.75 2.4675V2.25C11.75 2.05109 11.829 1.86032 11.9697 1.71967C12.1103 1.57902 12.3011 1.5 12.5 1.5C12.6989 1.5 12.8897 1.57902 13.0303 1.71967C13.171 1.86032 13.25 2.05109 13.25 2.25V2.4675L13.4569 2.40063C13.5511 2.36809 13.6508 2.35465 13.7502 2.36109C13.8496 2.36753 13.9468 2.39372 14.036 2.43813C14.1252 2.48253 14.2047 2.54427 14.2697 2.61973C14.3348 2.69518 14.3842 2.78285 14.415 2.87761C14.4458 2.97237 14.4574 3.07232 14.4492 3.17162C14.4409 3.27092 14.413 3.36758 14.3669 3.45595C14.3209 3.54433 14.2577 3.62264 14.1811 3.68633C14.1045 3.75002 14.0159 3.7978 13.9206 3.82688L13.7138 3.89438L13.8388 4.07063C13.8999 4.15006 13.9445 4.24095 13.9699 4.33791C13.9953 4.43488 14.001 4.53595 13.9867 4.63517C13.9724 4.73438 13.9383 4.82972 13.8865 4.91554C13.8348 5.00137 13.7663 5.07594 13.6852 5.13485C13.6041 5.19377 13.512 5.23582 13.4144 5.25854C13.3167 5.28126 13.2155 5.28418 13.1168 5.26712C13.018 5.25006 12.9236 5.21337 12.8393 5.15923C12.7549 5.10508 12.6823 5.03458 12.6256 4.95188L12.5 4.77625L12.375 4.95188C12.3184 5.03458 12.2457 5.10508 12.1614 5.15923C12.077 5.21337 11.9826 5.25006 11.8839 5.26712C11.7851 5.28418 11.6839 5.28126 11.5863 5.25854C11.4886 5.23582 11.3965 5.19377 11.3154 5.13485C11.2343 5.07594 11.1659 5.00137 11.1141 4.91554C11.0623 4.82972 11.0282 4.73438 11.0139 4.63517C10.9996 4.53595 11.0053 4.43488 11.0307 4.33791C11.0561 4.24095 11.1007 4.15006 11.1619 4.07063L11.2869 3.89438L11.08 3.82688C10.9863 3.79647 10.8995 3.74791 10.8246 3.68397C10.7497 3.62002 10.6881 3.54194 10.6433 3.45419C10.5986 3.36644 10.5716 3.27073 10.5638 3.17253C10.556 3.07433 10.5677 2.97556 10.5981 2.88188ZM14.75 8C14.75 9.33502 14.3541 10.6401 13.6124 11.7501C12.8707 12.8601 11.8165 13.7253 10.5831 14.2362C9.34971 14.7471 7.99251 14.8808 6.68314 14.6203C5.37377 14.3599 4.17104 13.717 3.22703 12.773C2.28303 11.829 1.64015 10.6262 1.3797 9.31686C1.11925 8.00749 1.25292 6.65029 1.76382 5.41689C2.27471 4.18349 3.13987 3.12928 4.2499 2.38758C5.35994 1.64588 6.66498 1.25 8 1.25C8.37693 1.24992 8.75322 1.28107 9.125 1.34313C9.32118 1.37628 9.49615 1.486 9.61143 1.64816C9.72671 1.81032 9.77284 2.01164 9.73969 2.20781C9.70654 2.40399 9.59681 2.57896 9.43465 2.69424C9.27249 2.80952 9.07118 2.85565 8.875 2.8225C8.58584 2.77423 8.29317 2.74998 8 2.75C7.01445 2.74933 6.04864 3.02629 5.21321 3.54915C4.37778 4.07201 3.70653 4.81962 3.27635 5.70633C2.84617 6.59305 2.67446 7.583 2.78089 8.5628C2.88732 9.54259 3.26759 10.4726 3.87813 11.2463C4.36425 10.628 4.98386 10.1276 5.69063 9.7825C5.2402 9.32637 4.93472 8.74722 4.81262 8.1179C4.69053 7.48859 4.75726 6.83722 5.00444 6.24574C5.25162 5.65426 5.6682 5.1491 6.20177 4.79379C6.73535 4.43848 7.36208 4.2489 8.00313 4.2489C8.64418 4.2489 9.27091 4.43848 9.80448 4.79379C10.3381 5.1491 10.7546 5.65426 11.0018 6.24574C11.249 6.83722 11.3157 7.48859 11.1936 8.1179C11.0715 8.74722 10.7661 9.32637 10.3156 9.7825C11.0224 10.1276 11.642 10.628 12.1281 11.2463C12.8573 10.3216 13.2527 9.17761 13.25 8C13.25 7.70683 13.2257 7.41417 13.1775 7.125C13.1444 6.92882 13.1905 6.72751 13.3058 6.56535C13.421 6.40319 13.596 6.29346 13.7922 6.26031C13.9884 6.22716 14.1897 6.2733 14.3518 6.38857C14.514 6.50385 14.6237 6.67882 14.6569 6.875C14.719 7.24678 14.7501 7.62307 14.75 8ZM8 9.25C8.34612 9.25 8.68446 9.14736 8.97225 8.95507C9.26004 8.76278 9.48434 8.48947 9.61679 8.1697C9.74925 7.84993 9.7839 7.49806 9.71638 7.15859C9.64885 6.81912 9.48218 6.50731 9.23744 6.26256C8.9927 6.01782 8.68088 5.85115 8.34141 5.78363C8.00194 5.7161 7.65008 5.75076 7.33031 5.88321C7.01054 6.01566 6.73722 6.23997 6.54493 6.52775C6.35264 6.81554 6.25 7.15388 6.25 7.5C6.25 7.96413 6.43438 8.40925 6.76257 8.73744C7.09075 9.06563 7.53587 9.25 8 9.25ZM8 13.25C9.08464 13.2508 10.1426 12.9137 11.0269 12.2856C10.6787 11.8096 10.2232 11.4223 9.69722 11.1554C9.17128 10.8885 8.5898 10.7493 8 10.7493C7.4102 10.7493 6.82872 10.8885 6.30279 11.1554C5.77685 11.4223 5.3213 11.8096 4.97313 12.2856C5.85741 12.9137 6.91536 13.2508 8 13.25Z" fill="#1A1A1A"/>
+                        </mask>
+                        <g mask="url(#mask-user-gear-admin)">
+                            <rect width="16" height="16" fill="#1E1E24"/>
+                        </g>
+                    </svg>
                 </div>
                 <div class="menu-item-text">Administrator</div>
                 <div class="menu-item-arrow">
-                    <svg width="16" height="16"><use href="#icon-caret-down"/></svg>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                 </div>
             </div>
             <div class="submenu" id="administrator">

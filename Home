@@ -1,0 +1,138 @@
+        .menu-item-text {
+            flex: 1;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 20px;
+            color: #28333f;
+--
+        .submenu-item-text {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 20px;
+            color: #28333f;
+        }
+--
+                <div class="menu-item-text">Home</div>
+            </div>
+
+            <div class="menu-item">
+                <div class="menu-item-icon">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+--
+                <div class="menu-item-text">Search Builder</div>
+            </div>
+
+            <div class="menu-item">
+                <div class="menu-item-icon">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+--
+                <div class="menu-item-text">Alerts</div>
+            </div>
+
+            <div class="menu-item">
+                <div class="menu-item-icon">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+--
+                <div class="menu-item-text">Saved</div>
+            </div>
+
+            <div class="menu-item expandable" data-submenu="interest">
+                <div class="menu-item-icon">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+--
+                <div class="menu-item-text">Interest</div>
+                <div class="menu-item-arrow">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+--
+                    <div class="submenu-item-text">Tesla Inc.</div>
+                </div>
+                <div class="submenu-item">
+                    <div class="submenu-item-text">NVIDIA Corporation</div>
+                </div>
+                <div class="submenu-item">
+                    <div class="submenu-item-text">OpenAI LLC</div>
+                </div>
+            </div>
+
+            <div class="menu-item expandable" data-submenu="newsletters">
+                <div class="menu-item-icon">
+--
+                <div class="menu-item-text">Newsletters</div>
+                <div class="menu-item-arrow">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+--
+                    <div class="submenu-item-text">Newsletter Builder</div>
+                </div>
+                <div class="submenu-item">
+                    <div class="submenu-item-text">View Newsletters</div>
+                </div>
+            </div>
+
+            <div class="menu-item expandable" data-submenu="companies">
+                <div class="menu-item-icon">
+--
+                <div class="menu-item-text">Companies/Markets</div>
+                <div class="menu-item-arrow">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+--
+                    <div class="submenu-item-text">Companies Screening</div>
+                </div>
+                <div class="submenu-item">
+                    <div class="submenu-item-text">Executives</div>
+                </div>
+                <div class="submenu-item">
+                    <div class="submenu-item-text">Quotes</div>
+                </div>
+                <div class="submenu-item">
+                    <div class="submenu-item-text">Market Data Charts</div>
+                </div>
+            </div>
+
+            <div class="menu-item expandable" data-submenu="administrator">
+                <div class="menu-item-icon">
+--
+                <div class="menu-item-text">Administrator</div>
+                <div class="menu-item-arrow">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+--
+                    <div class="submenu-item-text">Group Manager</div>
+                </div>
+                <div class="submenu-item">
+                    <div class="submenu-item-text">Custom Client Billing</div>
+                </div>
+                <div class="submenu-item">
+                    <div class="submenu-item-text">Reader (External)</div>
+                </div>
+                <div class="submenu-item">
+                    <div class="submenu-item-text">Registration</div>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+--
+                console.log('Selected:', item.querySelector('.submenu-item-text').textContent);
+            });
+        });
+
+        // Handle regular menu item clicks
+        const regularMenuItems = document.querySelectorAll('.menu-item:not(.expandable)');
+--
+                console.log('Selected:', item.querySelector('.menu-item-text').textContent);
+            });
+        });
+
+        // Initialize with Interest section expanded
+        const interestItem = document.querySelector('[data-submenu="interest"]');

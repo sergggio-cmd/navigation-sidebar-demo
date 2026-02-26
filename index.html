@@ -372,9 +372,19 @@
     </div>
 
     <script>
-        // Handle expandable menu items (accordion behavior - only one open at a time)
+        // Get all elements
         const expandableItems = document.querySelectorAll('.menu-item.expandable');
+        const submenuItems = document.querySelectorAll('.submenu-item');
+        const regularMenuItems = document.querySelectorAll('.menu-item:not(.expandable)');
 
+        // Function to clear all selections
+        function clearAllSelections() {
+            regularMenuItems.forEach(mi => mi.classList.remove('active'));
+            expandableItems.forEach(ei => ei.classList.remove('active'));
+            submenuItems.forEach(si => si.classList.remove('highlight'));
+        }
+
+        // Handle expandable menu items (accordion behavior + selection)
         expandableItems.forEach(item => {
             item.addEventListener('click', () => {
                 const submenuId = item.getAttribute('data-submenu');
@@ -391,7 +401,7 @@
                     }
                 });
 
-                // Toggle current item
+                // Toggle current item expansion
                 if (isCurrentlyExpanded) {
                     item.classList.remove('expanded');
                     submenu.classList.remove('show');
@@ -399,22 +409,22 @@
                     item.classList.add('expanded');
                     submenu.classList.add('show');
                 }
+
+                // Handle selection
+                clearAllSelections();
+                item.classList.add('active');
+
+                console.log('Selected:', item.querySelector('.menu-item-text').textContent);
             });
         });
 
         // Handle submenu item clicks
-        const submenuItems = document.querySelectorAll('.submenu-item');
-        const regularMenuItems = document.querySelectorAll('.menu-item:not(.expandable)');
-
         submenuItems.forEach(item => {
             item.addEventListener('click', (e) => {
                 e.stopPropagation();
 
-                // Remove highlight from all submenu items
-                submenuItems.forEach(si => si.classList.remove('highlight'));
-
-                // Remove active state from all regular menu items
-                regularMenuItems.forEach(mi => mi.classList.remove('active'));
+                // Clear all selections
+                clearAllSelections();
 
                 // Add highlight to clicked item
                 item.classList.add('highlight');
@@ -426,11 +436,8 @@
         // Handle regular menu item clicks
         regularMenuItems.forEach(item => {
             item.addEventListener('click', () => {
-                // Remove active state from all menu items
-                regularMenuItems.forEach(mi => mi.classList.remove('active'));
-
-                // Remove highlight from all submenu items
-                submenuItems.forEach(si => si.classList.remove('highlight'));
+                // Clear all selections
+                clearAllSelections();
 
                 // Add active state to clicked item
                 item.classList.add('active');

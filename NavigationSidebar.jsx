@@ -3,10 +3,11 @@ import './NavigationSidebar.css';
 
 const NavigationSidebar = () => {
   const [expandedMenu, setExpandedMenu] = useState('interest');
-  const [selectedItem, setSelectedItem] = useState('tesla');
+  const [selectedItem, setSelectedItem] = useState(null);
 
   const handleMenuClick = (menuId) => {
     setExpandedMenu(expandedMenu === menuId ? null : menuId);
+    setSelectedItem(menuId);
   };
 
   const handleMainItemClick = (itemId) => {
@@ -93,7 +94,7 @@ const NavigationSidebar = () => {
 
       {/* Interest Dropdown */}
       <div
-        className={`menu-item expandable ${expandedMenu === 'interest' ? 'expanded' : ''}`}
+        className={`menu-item expandable ${expandedMenu === 'interest' ? 'expanded' : ''} ${selectedItem === 'interest' ? 'active' : ''}`}
         onClick={() => handleMenuClick('interest')}
       >
         <div className="menu-item-icon">
@@ -136,7 +137,7 @@ const NavigationSidebar = () => {
 
       {/* Newsletters Dropdown */}
       <div
-        className={`menu-item expandable ${expandedMenu === 'newsletters' ? 'expanded' : ''}`}
+        className={`menu-item expandable ${expandedMenu === 'newsletters' ? 'expanded' : ''} ${selectedItem === 'newsletters' ? 'active' : ''}`}
         onClick={() => handleMenuClick('newsletters')}
       >
         <div className="menu-item-icon">
@@ -173,7 +174,7 @@ const NavigationSidebar = () => {
 
       {/* Companies/Markets Dropdown */}
       <div
-        className={`menu-item expandable ${expandedMenu === 'companies' ? 'expanded' : ''}`}
+        className={`menu-item expandable ${expandedMenu === 'companies' ? 'expanded' : ''} ${selectedItem === 'companies' ? 'active' : ''}`}
         onClick={() => handleMenuClick('companies')}
       >
         <div className="menu-item-icon">
@@ -222,7 +223,7 @@ const NavigationSidebar = () => {
 
       {/* Administrator Dropdown */}
       <div
-        className={`menu-item expandable ${expandedMenu === 'administrator' ? 'expanded' : ''}`}
+        className={`menu-item expandable ${expandedMenu === 'administrator' ? 'expanded' : ''} ${selectedItem === 'administrator' ? 'active' : ''}`}
         onClick={() => handleMenuClick('administrator')}
       >
         <div className="menu-item-icon">

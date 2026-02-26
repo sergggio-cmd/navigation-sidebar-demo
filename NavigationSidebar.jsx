@@ -138,10 +138,11 @@ const NavigationSidebar = () => {
       </div>
 
       {/* Newsletters Dropdown */}
-      <div
-        className={`menu-item expandable ${expandedMenu === 'newsletters' ? 'expanded' : ''} ${selectedItem === 'newsletters' ? 'active' : ''}`}
-        onClick={() => handleMenuClick('newsletters')}
-      >
+      <div className="dropdown-container">
+        <div
+          className={`menu-item expandable ${expandedMenu === 'newsletters' ? 'expanded' : ''} ${selectedItem === 'newsletters' ? 'active' : ''}`}
+          onClick={() => handleMenuClick('newsletters')}
+        >
         <div className="menu-item-icon">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
             <mask id="mask-newspaper-newsletters" style={{maskType: 'alpha'}} maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
@@ -173,12 +174,14 @@ const NavigationSidebar = () => {
           <div className="submenu-item-text">View Newsletters</div>
         </div>
       </div>
+      </div>
 
       {/* Companies/Markets Dropdown */}
-      <div
-        className={`menu-item expandable ${expandedMenu === 'companies' ? 'expanded' : ''} ${selectedItem === 'companies' ? 'active' : ''}`}
-        onClick={() => handleMenuClick('companies')}
-      >
+      <div className="dropdown-container">
+        <div
+          className={`menu-item expandable ${expandedMenu === 'companies' ? 'expanded' : ''} ${selectedItem === 'companies' ? 'active' : ''}`}
+          onClick={() => handleMenuClick('companies')}
+        >
         <div className="menu-item-icon">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
             <mask id="mask-chart-companies" style={{maskType: 'alpha'}} maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
@@ -222,12 +225,14 @@ const NavigationSidebar = () => {
           <div className="submenu-item-text">Market Data Charts</div>
         </div>
       </div>
+      </div>
 
       {/* Administrator Dropdown */}
-      <div
-        className={`menu-item expandable ${expandedMenu === 'administrator' ? 'expanded' : ''} ${selectedItem === 'administrator' ? 'active' : ''}`}
-        onClick={() => handleMenuClick('administrator')}
-      >
+      <div className="dropdown-container">
+        <div
+          className={`menu-item expandable ${expandedMenu === 'administrator' ? 'expanded' : ''} ${selectedItem === 'administrator' ? 'active' : ''}`}
+          onClick={() => handleMenuClick('administrator')}
+        >
         <div className="menu-item-icon">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
             <mask id="mask-user-gear-admin" style={{maskType: 'alpha'}} maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
@@ -270,6 +275,7 @@ const NavigationSidebar = () => {
         >
           <div className="submenu-item-text">Registration</div>
         </div>
+      </div>
       </div>
     </nav>
   );

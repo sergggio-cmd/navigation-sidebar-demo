@@ -31,12 +31,12 @@
 
         .nav-sidebar {
             position: relative;
-            width: 304px;
+            width: 272px;
             height: 86vh;
             background: white;
             border: 1px solid #e0e0e0;
             border-radius: 8px;
-            padding: 8px 24px 8px 16px;
+            padding: 8px 16px;
             display: flex;
             flex-direction: column;
             gap: 8px;
@@ -57,11 +57,37 @@
         }
 
         .menu-item:hover {
-            background: #f5f5f5;
+            background: rgba(105, 120, 135, 0.12);
+            border-radius: 8px;
+        }
+
+        .menu-item.expandable:hover {
+            background: rgba(105, 120, 135, 0.12);
+            border-radius: 8px;
         }
 
         .menu-item.active {
-            background: #e8f4f8;
+            background: rgba(15, 112, 137, 0.16);
+        }
+
+        .menu-item.active .menu-item-text {
+            color: #0b1118;
+        }
+
+        .menu-item.active .menu-item-icon svg rect {
+            fill: #0F7089;
+        }
+
+        .menu-item.active .menu-item-icon svg path {
+            fill: #0F7089;
+        }
+
+        .menu-item.active .menu-item-icon svg circle {
+            stroke: #0F7089;
+        }
+
+        .menu-item.active .menu-item-icon svg path[stroke] {
+            stroke: #0F7089;
         }
 
         .menu-item-icon {
@@ -118,7 +144,7 @@
             display: flex;
             flex-direction: column;
             gap: 8px;
-            padding-left: 28px;
+            padding-left: 0;
             margin: 0;
             max-height: 0;
             overflow: hidden;
@@ -134,22 +160,26 @@
         }
 
         .submenu-item {
-            min-height: 36px;
+            min-height: 40px;
             display: flex;
             align-items: center;
-            padding: 6px 8px;
-            border-radius: 6px;
+            padding: 4px 8px;
+            border-radius: 8px;
             cursor: pointer;
             transition: background 0.2s;
             user-select: none;
         }
 
         .submenu-item:hover {
-            background: #f5f5f5;
+            background: rgba(105, 120, 135, 0.12);
         }
 
         .submenu-item.highlight {
-            background: #e8f4f8;
+            background: rgba(15, 112, 137, 0.16);
+        }
+
+        .submenu-item.highlight .submenu-item-text {
+            color: #0b1118;
         }
 
         .submenu-item-text {

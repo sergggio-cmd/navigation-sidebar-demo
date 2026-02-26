@@ -66,27 +66,33 @@
             border-radius: 8px;
         }
 
-        .menu-item.active {
+        .menu-item.active,
+        .menu-item.expandable.active {
             background: #E7F0FE;
         }
 
-        .menu-item.active .menu-item-text {
+        .menu-item.active .menu-item-text,
+        .menu-item.expandable.active .menu-item-text {
             color: #0b1118;
         }
 
-        .menu-item.active .menu-item-icon svg rect {
+        .menu-item.active .menu-item-icon svg rect,
+        .menu-item.expandable.active .menu-item-icon svg rect {
             fill: #1067F4;
         }
 
-        .menu-item.active .menu-item-icon svg path {
+        .menu-item.active .menu-item-icon svg path,
+        .menu-item.expandable.active .menu-item-icon svg path {
             fill: #1067F4;
         }
 
-        .menu-item.active .menu-item-icon svg circle {
+        .menu-item.active .menu-item-icon svg circle,
+        .menu-item.expandable.active .menu-item-icon svg circle {
             stroke: #1067F4;
         }
 
-        .menu-item.active .menu-item-icon svg path[stroke] {
+        .menu-item.active .menu-item-icon svg path[stroke],
+        .menu-item.expandable.active .menu-item-icon svg path[stroke] {
             stroke: #1067F4;
         }
 

@@ -29,20 +29,55 @@
 }
 
 .menu-item:hover {
-    background: #f5f5f5;
+    background: #F1F1F3;
+    border-radius: 8px;
 }
 
-.menu-item.active {
-    background: #e8f4f8;
+.menu-item.expandable:hover {
+    background: #F1F1F3;
+    border-radius: 8px;
+}
+
+.menu-item.active,
+.menu-item.expandable.active {
+    background: #E7F0FE;
+}
+
+.menu-item.active .menu-item-text,
+.menu-item.expandable.active .menu-item-text {
+    color: #0b1118;
+}
+
+.menu-item.active .menu-item-icon svg rect,
+.menu-item.expandable.active .menu-item-icon svg rect {
+    fill: #1067F4;
+}
+
+.menu-item.active .menu-item-icon svg path,
+.menu-item.expandable.active .menu-item-icon svg path {
+    fill: #1067F4;
+}
+
+.menu-item.active .menu-item-icon svg circle,
+.menu-item.expandable.active .menu-item-icon svg circle {
+    stroke: #1067F4;
+}
+
+.menu-item.active .menu-item-icon svg path[stroke],
+.menu-item.expandable.active .menu-item-icon svg path[stroke] {
+    stroke: #1067F4;
 }
 
 .menu-item-icon {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+}
+
+.menu-item-icon {
     color: #28333f;
 }
 
@@ -67,6 +102,9 @@
     align-items: center;
     justify-content: center;
     transition: transform 0.2s;
+}
+
+.menu-item-arrow {
     color: #28333f;
 }
 
@@ -84,7 +122,7 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
-    padding-left: 28px;
+    padding-left: 0;
     margin: 0;
     max-height: 0;
     overflow: hidden;
@@ -100,22 +138,23 @@
 }
 
 .submenu-item {
-    min-height: 36px;
+    min-height: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
-    padding: 6px 8px;
-    border-radius: 6px;
+    padding: 8px 24px 8px 32px;
+    border-radius: 8px;
     cursor: pointer;
     transition: background 0.2s;
     user-select: none;
 }
 
 .submenu-item:hover {
-    background: #f5f5f5;
+    background: #F1F1F3;
 }
 
 .submenu-item.highlight {
-    background: #e8f4f8;
+    background: #E7F0FE;
 }
 
 .submenu-item-text {

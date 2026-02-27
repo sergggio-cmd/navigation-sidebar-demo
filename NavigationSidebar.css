@@ -162,3 +162,26 @@
     line-height: 20px;
     color: #0b1118;
 }
+
+.divider {
+    height: 1px;
+    background: #e0e0e0;
+    margin: 4px 0;
+    flex-shrink: 0;
+    width: 100%;
+    display: block;
+}
+
+.section-header {
+    padding: 4px 8px;
+    display: flex;
+    align-items: center;
+    min-height: 24px;
+}
+
+.section-header-text {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 16px;
+    color: #778694;
+}

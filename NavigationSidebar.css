@@ -245,3 +245,9 @@
     min-height: 0;
     height: 0;
 }
+
+.nav-sidebar.collapsed .submenu {
+    max-height: 0 !important;
+    margin: 0 !important;
+    transition: none !important;
+}

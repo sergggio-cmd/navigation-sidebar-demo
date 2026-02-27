@@ -188,16 +188,22 @@ const NavigationSidebar = () => {
         </div>
         <div className={`submenu ${expandedMenu === 'smart-reports' ? 'show' : ''}`}>
           <div
-            className={`submenu-item ${selectedItem === 'create-report' ? 'highlight' : ''}`}
-            onClick={(e) => { e.stopPropagation(); handleSubmenuItemClick('create-report'); }}
+            className={`submenu-item ${selectedItem === 'disney' ? 'highlight' : ''}`}
+            onClick={(e) => { e.stopPropagation(); handleSubmenuItemClick('disney'); }}
           >
-            <div className="submenu-item-text">Create Report</div>
+            <div className="submenu-item-text">The Walt Disney Company</div>
           </div>
           <div
-            className={`submenu-item ${selectedItem === 'view-reports' ? 'highlight' : ''}`}
-            onClick={(e) => { e.stopPropagation(); handleSubmenuItemClick('view-reports'); }}
+            className={`submenu-item ${selectedItem === 'nvidia-reports' ? 'highlight' : ''}`}
+            onClick={(e) => { e.stopPropagation(); handleSubmenuItemClick('nvidia-reports'); }}
           >
-            <div className="submenu-item-text">View Reports</div>
+            <div className="submenu-item-text">NVIDIA Corporation</div>
+          </div>
+          <div
+            className={`submenu-item ${selectedItem === 'jpmorgan' ? 'highlight' : ''}`}
+            onClick={(e) => { e.stopPropagation(); handleSubmenuItemClick('jpmorgan'); }}
+          >
+            <div className="submenu-item-text">JPMorgan Chase & Co.</div>
           </div>
         </div>
       </div>

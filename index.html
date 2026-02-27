@@ -547,11 +547,9 @@
             });
         });
 
-        // Initialize with Interest section expanded
-        const interestItem = document.querySelector('[data-submenu="interest"]');
-        const interestSubmenu = document.getElementById('interest');
-        interestItem.classList.add('expanded');
-        interestSubmenu.classList.add('show');
+        // Initialize with Home selected
+        const homeItem = regularMenuItems[0]; // First regular menu item is Home
+        homeItem.classList.add('active');
     </script>
 </body>
 </html>

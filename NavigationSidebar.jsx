@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './NavigationSidebar.css';
 
 const NavigationSidebar = () => {
-  const [expandedMenu, setExpandedMenu] = useState('interest');
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [expandedMenu, setExpandedMenu] = useState(null);
+  const [selectedItem, setSelectedItem] = useState('home');
 
   const handleMenuClick = (menuId) => {
     setExpandedMenu(expandedMenu === menuId ? null : menuId);

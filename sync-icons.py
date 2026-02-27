@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Icon Sync Script
-Synchronizes SVG icons from assets/icons/ to the inline sprite in index.html
+Synchronizes SVG icons from assets/icons/ to inline icons in index.html and NavigationSidebar.jsx
 """
 
 import os
@@ -11,6 +11,21 @@ from pathlib import Path
 # Configuration
 ICONS_DIR = Path('assets/icons')
 HTML_FILE = Path('index.html')
+REACT_FILE = Path('NavigationSidebar.jsx')
+
+# Mapping of icon files to their usage identifiers in the code
+ICON_MAPPINGS = {
+    'home.svg': ['mask-home'],
+    'search.svg': ['mask-search-builder'],
+    'bell.svg': ['mask-bell-alerts'],
+    'bookmark.svg': ['mask-bookmark-saved'],
+    'star.svg': ['mask-star-interest'],
+    'chat.svg': ['mask-chat', 'mask-chat-react'],
+    'reports.svg': ['mask-reports', 'mask-reports-react'],
+    'newspaper.svg': ['mask-newspaper-newsletters'],
+    'chart.svg': ['mask-chart-companies', 'mask-chart-companies-react'],
+    'user-gear.svg': ['mask-user-gear-admin'],
+}
 
 def read_svg_file(filepath):
     """Read and extract SVG content"""
@@ -18,148 +33,195 @@ def read_svg_file(filepath):
         content = f.read()
     return content
 
-def extract_svg_content(svg_content):
-    """Extract viewBox and inner content from SVG"""
-    # Extract viewBox
-    viewbox_match = re.search(r'viewBox="([^"]+)"', svg_content)
-    viewbox = viewbox_match.group(1) if viewbox_match else "0 0 16 16"
-
-    # Extract content between <svg> tags
+def extract_svg_inner_content(svg_content):
+    """Extract inner content from SVG (everything between <svg> tags)"""
+    # Remove outer <svg> tag and extract inner content
     content_match = re.search(r'<svg[^>]*>(.*?)</svg>', svg_content, re.DOTALL)
     if content_match:
-        inner_content = content_match.group(1).strip()
-    else:
-        inner_content = svg_content
+        return content_match.group(1).strip()
+    return svg_content.strip()
 
-    return viewbox, inner_content
+def update_mask_id(content, old_mask_id, new_mask_id):
+    """Update mask ID in SVG content"""
+    # Replace all mask ID references
+    content = re.sub(rf'id="{re.escape(old_mask_id)}"', f'id="{new_mask_id}"', content)
+    content = re.sub(rf'id=\'{re.escape(old_mask_id)}\'', f'id="{new_mask_id}"', content)
 
-def replace_colors_with_current(content):
-    """Replace hard-coded colors with currentColor"""
-    # Replace common fill colors
-    content = re.sub(r'fill="#[0-9A-Fa-f]{6}"', 'fill="currentColor"', content)
-    content = re.sub(r'fill="#[0-9A-Fa-f]{3}"', 'fill="currentColor"', content)
-
-    # Replace common stroke colors
-    content = re.sub(r'stroke="#[0-9A-Fa-f]{6}"', 'stroke="currentColor"', content)
-    content = re.sub(r'stroke="#[0-9A-Fa-f]{3}"', 'stroke="currentColor"', content)
-
-    # Update mask IDs to avoid conflicts
-    # Replace generic mask IDs with unique ones based on icon name
+    # Replace all mask URL references
+    content = re.sub(rf'url\(#{re.escape(old_mask_id)}\)', f'url(#{new_mask_id})', content)
 
     return content
 
-def make_mask_ids_unique(content, icon_name):
-    """Make mask IDs unique by adding icon name"""
-    # Find all mask id definitions and usages
-    mask_ids = re.findall(r'id="(mask[^"]*)"', content)
+def prepare_icon_for_html(svg_content, mask_id):
+    """Prepare icon content for HTML format"""
+    inner_content = extract_svg_inner_content(svg_content)
 
-    for mask_id in mask_ids:
-        new_mask_id = f"{mask_id}-{icon_name}"
-        # Replace id definition
-        content = content.replace(f'id="{mask_id}"', f'id="{new_mask_id}"')
-        # Replace url reference
-        content = content.replace(f'url(#{mask_id})', f'url(#{new_mask_id})')
+    # Find existing mask ID in the SVG
+    existing_mask = re.search(r'id="(mask[^"]*)"', inner_content)
+    if existing_mask:
+        old_mask_id = existing_mask.group(1)
+        inner_content = update_mask_id(inner_content, old_mask_id, mask_id)
 
-    return content
+    # Ensure proper indentation (24 spaces for HTML inline icons)
+    lines = inner_content.split('\n')
+    indented_lines = []
+    for line in lines:
+        if line.strip():
+            indented_lines.append(' ' * 24 + line.strip())
 
-def generate_sprite(icons_dir):
-    """Generate SVG sprite from icon files"""
-    symbols = []
+    return '\n'.join(indented_lines)
 
-    # Get all SVG files
-    svg_files = sorted(icons_dir.glob('*.svg'))
+def prepare_icon_for_react(svg_content, mask_id):
+    """Prepare icon content for React/JSX format"""
+    inner_content = extract_svg_inner_content(svg_content)
 
-    for svg_file in svg_files:
-        icon_name = svg_file.stem  # filename without extension
+    # Find existing mask ID in the SVG
+    existing_mask = re.search(r'id="(mask[^"]*)"', inner_content)
+    if existing_mask:
+        old_mask_id = existing_mask.group(1)
+        inner_content = update_mask_id(inner_content, old_mask_id, mask_id)
 
-        print(f"Processing: {icon_name}")
+    # Convert HTML attributes to JSX
+    inner_content = re.sub(r'style="mask-type:alpha"', 'style={{maskType: \'alpha\'}}', inner_content)
+    inner_content = re.sub(r'stroke-width="', 'strokeWidth="', inner_content)
+    inner_content = re.sub(r'stroke-linecap="', 'strokeLinecap="', inner_content)
+    inner_content = re.sub(r'stroke-linejoin="', 'strokeLinejoin="', inner_content)
 
-        svg_content = read_svg_file(svg_file)
-        viewbox, inner_content = extract_svg_content(svg_content)
+    # Ensure proper indentation (12-14 spaces for React inline icons)
+    lines = inner_content.split('\n')
+    indented_lines = []
+    for line in lines:
+        if line.strip():
+            indented_lines.append(' ' * 14 + line.strip())
 
-        # Replace colors with currentColor
-        inner_content = replace_colors_with_current(inner_content)
+    return '\n'.join(indented_lines)
 
-        # Make mask IDs unique
-        inner_content = make_mask_ids_unique(inner_content, icon_name)
-
-        # Create symbol
-        symbol = f'            <symbol id="icon-{icon_name}" viewBox="{viewbox}">\n'
-
-        # Indent inner content
-        for line in inner_content.split('\n'):
-            if line.strip():
-                symbol += f'                {line}\n'
-
-        symbol += '            </symbol>'
-
-        symbols.append(symbol)
-
-    # Generate complete sprite
-    sprite = '    <!-- SVG Sprite (hidden) -->\n'
-    sprite += '    <svg style="display: none;" xmlns="http://www.w3.org/2000/svg">\n'
-    sprite += '        <defs>\n'
-    sprite += '\n'.join(symbols)
-    sprite += '\n        </defs>\n'
-    sprite += '    </svg>\n'
-
-    return sprite
-
-def update_html(html_file, new_sprite):
-    """Update HTML file with new sprite"""
-    with open(html_file, 'r', encoding='utf-8') as f:
-        html_content = f.read()
-
-    # Find and replace the sprite section
-    # Pattern matches from <!-- SVG Sprite --> to </svg> (inclusive)
-    pattern = r'(\s*)<!-- SVG Sprite.*?</svg>\n'
+def find_and_replace_icon_in_html(html_content, mask_id, new_icon_content):
+    """Find and replace an icon in HTML content"""
+    # Pattern to match the SVG icon with specific mask ID
+    # Matches from <svg...> to </svg> that contains the mask ID
+    pattern = rf'(<svg width="16" height="16"[^>]*>)\s*<mask id="{re.escape(mask_id)}".*?</svg>'
 
     match = re.search(pattern, html_content, re.DOTALL)
-
     if match:
-        # Replace with new sprite
-        updated_html = re.sub(pattern, new_sprite, html_content, count=1, flags=re.DOTALL)
+        # Build new SVG
+        new_svg = f'''<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+{new_icon_content}
+                    </svg>'''
 
-        # Write back
-        with open(html_file, 'w', encoding='utf-8') as f:
-            f.write(updated_html)
+        # Replace in content
+        html_content = re.sub(pattern, new_svg, html_content, count=1, flags=re.DOTALL)
+        return html_content, True
 
-        print(f"\n✅ Successfully updated {html_file}")
-        return True
-    else:
-        print(f"\n❌ Could not find sprite section in {html_file}")
-        print("   Make sure the HTML contains: <!-- SVG Sprite (hidden) -->")
-        return False
+    return html_content, False
 
-def main():
+def find_and_replace_icon_in_react(react_content, mask_id, new_icon_content):
+    """Find and replace an icon in React/JSX content"""
+    # Pattern to match the SVG icon with specific mask ID
+    pattern = rf'(<svg width="16" height="16"[^>]*>)\s*<mask id="{re.escape(mask_id)}".*?</svg>'
+
+    match = re.search(pattern, react_content, re.DOTALL)
+    if match:
+        # Build new SVG
+        new_svg = f'''<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+{new_icon_content}
+          </svg>'''
+
+        # Replace in content
+        react_content = re.sub(pattern, new_svg, react_content, count=1, flags=re.DOTALL)
+        return react_content, True
+
+    return react_content, False
+
+def sync_icons():
+    """Synchronize all icons from assets to HTML and React files"""
     print("🔄 Icon Sync Script")
-    print("=" * 50)
+    print("=" * 60)
 
-    # Check if directories exist
+    # Check if directories/files exist
     if not ICONS_DIR.exists():
         print(f"❌ Icons directory not found: {ICONS_DIR}")
-        return
+        return False
 
     if not HTML_FILE.exists():
         print(f"❌ HTML file not found: {HTML_FILE}")
-        return
+        return False
 
-    # Generate sprite
-    print(f"\n📁 Reading icons from: {ICONS_DIR}")
-    sprite = generate_sprite(ICONS_DIR)
+    if not REACT_FILE.exists():
+        print(f"❌ React file not found: {REACT_FILE}")
+        return False
 
-    # Update HTML
-    print(f"\n📝 Updating: {HTML_FILE}")
-    success = update_html(HTML_FILE, sprite)
+    # Read file contents
+    with open(HTML_FILE, 'r', encoding='utf-8') as f:
+        html_content = f.read()
 
-    if success:
-        print("\n✨ Icon synchronization complete!")
-        print("\nNext steps:")
-        print("  1. Review changes: git diff index.html")
-        print("  2. Test locally: open index.html")
-        print("  3. Commit: git add index.html && git commit -m 'Update icon sprite'")
+    with open(REACT_FILE, 'r', encoding='utf-8') as f:
+        react_content = f.read()
+
+    html_updated = False
+    react_updated = False
+
+    # Process each icon
+    print(f"\n📁 Reading icons from: {ICONS_DIR}\n")
+
+    for icon_file, mask_ids in ICON_MAPPINGS.items():
+        icon_path = ICONS_DIR / icon_file
+
+        if not icon_path.exists():
+            print(f"⚠️  {icon_file}: File not found, skipping...")
+            continue
+
+        print(f"📝 Processing: {icon_file}")
+        svg_content = read_svg_file(icon_path)
+
+        for mask_id in mask_ids:
+            # Determine if this is for HTML or React based on mask_id suffix
+            is_react = mask_id.endswith('-react')
+
+            if is_react:
+                # Update React file
+                prepared_content = prepare_icon_for_react(svg_content, mask_id)
+                react_content, replaced = find_and_replace_icon_in_react(react_content, mask_id, prepared_content)
+                if replaced:
+                    print(f"   ✓ Updated {mask_id} in React")
+                    react_updated = True
+                else:
+                    print(f"   ⚠️  {mask_id} not found in React")
+            else:
+                # Update HTML file
+                prepared_content = prepare_icon_for_html(svg_content, mask_id)
+                html_content, replaced = find_and_replace_icon_in_html(html_content, mask_id, prepared_content)
+                if replaced:
+                    print(f"   ✓ Updated {mask_id} in HTML")
+                    html_updated = True
+                else:
+                    print(f"   ⚠️  {mask_id} not found in HTML")
+
+    # Write back updated contents
+    if html_updated:
+        with open(HTML_FILE, 'w', encoding='utf-8') as f:
+            f.write(html_content)
+        print(f"\n✅ Successfully updated {HTML_FILE}")
     else:
-        print("\n❌ Synchronization failed")
+        print(f"\n⚠️  No changes made to {HTML_FILE}")
+
+    if react_updated:
+        with open(REACT_FILE, 'w', encoding='utf-8') as f:
+            f.write(react_content)
+        print(f"✅ Successfully updated {REACT_FILE}")
+    else:
+        print(f"⚠️  No changes made to {REACT_FILE}")
+
+    if html_updated or react_updated:
+        print("\n✨ Icon synchronization complete!")
+        print("\n📋 Next steps:")
+        print("  1. Review changes: git diff index.html NavigationSidebar.jsx")
+        print("  2. Test locally: open index.html")
+        print("  3. Commit: git add . && git commit -m 'Sync icons from assets'")
+        return True
+    else:
+        print("\n❌ No icons were updated")
+        return False
 
 if __name__ == '__main__':
-    main()
+    sync_icons()

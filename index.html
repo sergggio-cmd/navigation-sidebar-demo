@@ -197,7 +197,7 @@
         .divider {
             height: 1px;
             background: #e0e0e0;
-            margin: 4px 0;
+            margin: 0;
             flex-shrink: 0;
             width: 100%;
             display: block;
@@ -208,6 +208,7 @@
             display: flex;
             align-items: center;
             min-height: 24px;
+            margin: 0;
         }
 
         .section-header-text {
@@ -507,17 +508,6 @@
                 } else {
                     item.classList.add('expanded');
                     submenu.classList.add('show');
-
-                    // Auto-scroll to show the expanded dropdown
-                    setTimeout(() => {
-                        const sidebar = document.querySelector('.nav-sidebar');
-                        const submenuBottom = submenu.getBoundingClientRect().bottom;
-                        const sidebarBottom = sidebar.getBoundingClientRect().bottom;
-
-                        if (submenuBottom > sidebarBottom) {
-                            submenu.scrollIntoView({ behavior: 'smooth', block: 'end' });
-                        }
-                    }, 50);
                 }
 
                 // Handle selection

@@ -160,9 +160,7 @@
             margin: 0;
             max-height: 0;
             overflow: hidden;
-            transition-duration: 200ms;
-            transition-timing-function: cubic-bezier(0, 0, 0.5, 1);
-            transition-property: max-height;
+            transition: max-height 200ms cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .submenu.show {
@@ -509,6 +507,17 @@
                 } else {
                     item.classList.add('expanded');
                     submenu.classList.add('show');
+
+                    // Auto-scroll to show the expanded dropdown
+                    setTimeout(() => {
+                        const sidebar = document.querySelector('.nav-sidebar');
+                        const submenuBottom = submenu.getBoundingClientRect().bottom;
+                        const sidebarBottom = sidebar.getBoundingClientRect().bottom;
+
+                        if (submenuBottom > sidebarBottom) {
+                            submenu.scrollIntoView({ behavior: 'smooth', block: 'end' });
+                        }
+                    }, 50);
                 }
 
                 // Handle selection

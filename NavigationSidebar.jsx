@@ -1,13 +1,32 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './NavigationSidebar.css';
 
 const NavigationSidebar = () => {
   const [expandedMenu, setExpandedMenu] = useState(null);
   const [selectedItem, setSelectedItem] = useState('home');
+  const submenuRefs = useRef({});
 
   const handleMenuClick = (menuId) => {
+    const isExpanding = expandedMenu !== menuId;
     setExpandedMenu(expandedMenu === menuId ? null : menuId);
     setSelectedItem(menuId);
+
+    // Auto-scroll to show the expanded dropdown
+    if (isExpanding) {
+      setTimeout(() => {
+        const submenu = submenuRefs.current[menuId];
+        const sidebar = submenu?.closest('.nav-sidebar');
+
+        if (submenu && sidebar) {
+          const submenuBottom = submenu.getBoundingClientRect().bottom;
+          const sidebarBottom = sidebar.getBoundingClientRect().bottom;
+
+          if (submenuBottom > sidebarBottom) {
+            submenu.scrollIntoView({ behavior: 'smooth', block: 'end' });
+          }
+        }
+      }, 50);
+    }
   };
 
   const handleMainItemClick = (itemId) => {
@@ -115,7 +134,7 @@ const NavigationSidebar = () => {
             </svg>
           </div>
         </div>
-        <div className={`submenu ${expandedMenu === 'interest' ? 'show' : ''}`}>
+        <div className={`submenu ${expandedMenu === 'interest' ? 'show' : ''}`} ref={el => submenuRefs.current['interest'] = el}>
           <div
             className={`submenu-item ${selectedItem === 'tesla' ? 'highlight' : ''}`}
             onClick={(e) => { e.stopPropagation(); handleSubmenuItemClick('tesla'); }}
@@ -186,7 +205,7 @@ const NavigationSidebar = () => {
             </svg>
           </div>
         </div>
-        <div className={`submenu ${expandedMenu === 'smart-reports' ? 'show' : ''}`}>
+        <div className={`submenu ${expandedMenu === 'smart-reports' ? 'show' : ''}`} ref={el => submenuRefs.current['smart-reports'] = el}>
           <div
             className={`submenu-item ${selectedItem === 'create-report' ? 'highlight' : ''}`}
             onClick={(e) => { e.stopPropagation(); handleSubmenuItemClick('create-report'); }}
@@ -233,7 +252,7 @@ const NavigationSidebar = () => {
           </svg>
         </div>
       </div>
-      <div className={`submenu ${expandedMenu === 'newsletters' ? 'show' : ''}`}>
+      <div className={`submenu ${expandedMenu === 'newsletters' ? 'show' : ''}`} ref={el => submenuRefs.current['newsletters'] = el}>
         <div
           className={`submenu-item ${selectedItem === 'newsletter-builder' ? 'highlight' : ''}`}
           onClick={(e) => { e.stopPropagation(); handleSubmenuItemClick('newsletter-builder'); }}
@@ -272,7 +291,7 @@ const NavigationSidebar = () => {
           </svg>
         </div>
       </div>
-      <div className={`submenu ${expandedMenu === 'companies' ? 'show' : ''}`}>
+      <div className={`submenu ${expandedMenu === 'companies' ? 'show' : ''}`} ref={el => submenuRefs.current['companies'] = el}>
         <div
           className={`submenu-item ${selectedItem === 'companies-screening' ? 'highlight' : ''}`}
           onClick={(e) => { e.stopPropagation(); handleSubmenuItemClick('companies-screening'); }}
@@ -323,7 +342,7 @@ const NavigationSidebar = () => {
           </svg>
         </div>
       </div>
-      <div className={`submenu ${expandedMenu === 'administrator' ? 'show' : ''}`}>
+      <div className={`submenu ${expandedMenu === 'administrator' ? 'show' : ''}`} ref={el => submenuRefs.current['administrator'] = el}>
         <div
           className={`submenu-item ${selectedItem === 'group-manager' ? 'highlight' : ''}`}
           onClick={(e) => { e.stopPropagation(); handleSubmenuItemClick('group-manager'); }}
